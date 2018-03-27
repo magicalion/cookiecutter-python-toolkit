@@ -1,17 +1,33 @@
-default: &default
-  default: null
-  name: ''
-  des: ''
-  range: null
-  required: false
-  type: input
-  value: null
-  value_type: str
+#default: &default
+#  default: null
+#  name: ''
+#  des: ''
+#  range: null
+#  required: false
+#  type: input
+#  value: null
+#  value_type: str
 
+# reference block
+default_value_range:
+  int: &default_int_range 0-65536 # e.g. 0-65536 | 2, 4, 6 | >10
+  float: &default_float_range 0-65536
+  datetime: &default_datetime_range XXXXX
+
+param_spec: &default_2
+  name:               # required,
+  value_type:         # required, available Types: int, str, float, img, datetime, [int], [str], [float]
+  default_value:      # required, must match the value_type
+  value_range:        # optional, reference to default_value_range
+  des:
+  optional: False
+
+# basic block
 author_name: {{cookiecutter.author_name}}
 module_name: {{cookiecutter.module_name}}
 module_description: {{cookiecutter.module_description}}
-input:
+
+input: # mapping to input parameter in main.py
   run: &params
     param_1:
       <<: *default
